@@ -1,0 +1,88 @@
+<UserControl x:Class="SimHubMqttPlugin.SettingsControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800">
+    <Grid Margin="10">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <TextBlock Grid.Row="0" Text="Home Assistant Lap Time Tracker Settings" FontWeight="Bold" FontSize="18" Margin="0,0,0,15" />
+
+        <StackPanel Grid.Row="1" Orientation="Horizontal" Margin="0,0,0,15">
+            <TextBlock Text="Current Driver:" Width="200" VerticalAlignment="Center" FontWeight="Bold"/>
+            <ComboBox x:Name="DriverComboBox" IsEditable="True" Width="200" VerticalAlignment="Center" Padding="4"/>
+            <Button Content="X" ToolTip="Delete Driver" Click="DeleteDriverButton_Click" Width="30" Margin="10,0,0,0" Background="#FFCC0000" Foreground="White" FontWeight="Bold"/>
+        </StackPanel>
+
+        <StackPanel Grid.Row="2" Orientation="Horizontal" Margin="0,0,0,10">
+            <TextBlock Text="MQTT Broker IP / Hostname:" Width="200" VerticalAlignment="Center"/>
+            <TextBox x:Name="BrokerIpTextBox" Width="250" VerticalAlignment="Center" Padding="4"/>
+        </StackPanel>
+
+        <StackPanel Grid.Row="3" Orientation="Horizontal" Margin="0,0,0,10">
+            <TextBlock Text="MQTT Username:" Width="200" VerticalAlignment="Center"/>
+            <TextBox x:Name="UsernameTextBox" Width="250" VerticalAlignment="Center" Padding="4"/>
+        </StackPanel>
+
+        <StackPanel Grid.Row="4" Orientation="Horizontal" Margin="0,0,0,10">
+            <TextBlock Text="MQTT Password:" Width="200" VerticalAlignment="Center"/>
+            <PasswordBox x:Name="PasswordBox" Width="250" VerticalAlignment="Center" Padding="4"/>
+        </StackPanel>
+
+        <StackPanel Grid.Row="5" Orientation="Horizontal" Margin="0,0,0,10">
+            <TextBlock Text="Best Laps Topic:" Width="200" VerticalAlignment="Center"/>
+            <TextBox x:Name="TopicTextBox" Width="250" VerticalAlignment="Center" Padding="4"/>
+        </StackPanel>
+
+        <StackPanel Grid.Row="6" Orientation="Horizontal" Margin="0,0,0,15">
+            <TextBlock Text="Recent Laps Topic:" Width="200" VerticalAlignment="Center"/>
+            <TextBox x:Name="RecentTopicTextBox" Width="250" VerticalAlignment="Center" Padding="4"/>
+        </StackPanel>
+
+        <StackPanel Grid.Row="7" Orientation="Horizontal" Margin="0,0,0,10">
+            <Button Content="Test Connection" x:Name="TestConnectionButton" Click="TestConnectionButton_Click" Width="150" Padding="5" Margin="0,0,10,0"/>
+            <Button Content="Save Settings" x:Name="SaveButton" Click="SaveButton_Click" Width="150" Padding="5" Background="#FF007ACC" Foreground="White" FontWeight="Bold"/>
+        </StackPanel>
+
+        <TextBlock Grid.Row="8" x:Name="StatusTextBlock" Text="" Margin="0,10,0,10" FontStyle="Italic" FontWeight="Bold"/>
+        
+        <TextBlock Grid.Row="9" Text="5 Most Recent Laps" FontWeight="Bold" FontSize="14" Margin="0,5,0,5" />
+        <DataGrid Grid.Row="10" x:Name="RecentLapsDataGrid" AutoGenerateColumns="False" HeadersVisibility="Column" SelectionMode="Single" SelectionUnit="FullRow" CanUserAddRows="False" CanUserDeleteRows="False" IsReadOnly="True" Margin="0,0,0,15" MaxHeight="150">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Time" Binding="{Binding Time}" Width="100"/>
+                <DataGridTextColumn Header="Driver" Binding="{Binding Driver}" Width="120"/>
+                <DataGridTextColumn Header="Track" Binding="{Binding Track}" Width="130"/>
+                <DataGridTextColumn Header="Layout" Binding="{Binding Layout}" Width="100"/>
+                <DataGridTextColumn Header="Car" Binding="{Binding Car}" Width="130"/>
+                <DataGridTextColumn Header="Lap Time" Binding="{Binding LapTime}" Width="*"/>
+            </DataGrid.Columns>
+        </DataGrid>
+
+        <TextBlock Grid.Row="11" Text="All-Time Best Laps" FontWeight="Bold" FontSize="14" Margin="0,0,0,5" />
+        <DataGrid Grid.Row="12" x:Name="LapsDataGrid" AutoGenerateColumns="False" HeadersVisibility="Column" SelectionMode="Single" SelectionUnit="FullRow" CanUserAddRows="False" CanUserDeleteRows="False" IsReadOnly="True">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Driver" Binding="{Binding Driver}" Width="150"/>
+                <DataGridTextColumn Header="Track" Binding="{Binding Track}" Width="150"/>
+                <DataGridTextColumn Header="Layout" Binding="{Binding Layout}" Width="100"/>
+                <DataGridTextColumn Header="Car" Binding="{Binding Car}" Width="150"/>
+                <DataGridTextColumn Header="Best Lap Time" Binding="{Binding LapTime}" Width="*"/>
+            </DataGrid.Columns>
+        </DataGrid>
+    </Grid>
+</UserControl>
